@@ -25,10 +25,12 @@ class MainViewModel(
     val resultState: LiveData<String> = _resultState
 
     private val _precisionNumber = MutableLiveData<Int>()
+    private val _vibrationNumber = MutableLiveData<Int>()
 
     init {
         viewModelScope.launch {
             _precisionNumber.value = settingsDao.getPrecisionNumber()
+            _vibrationNumber.value = settingsDao.getVibrationNumber()
         }
     }
 
@@ -94,6 +96,7 @@ class MainViewModel(
             if (expression.isNotEmpty() && expression.last().isDigit()) {
                 _resultState.value = _precisionNumber.value?.let { calculateExpression(expression, it) }
             }
+            _vibrationNumber.value = settingsDao.getVibrationNumber()
         }
     }
 

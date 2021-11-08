@@ -1,11 +1,16 @@
 package ru.mipt.android_calculator.presentation.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -65,33 +70,37 @@ class MainActivity : BaseActivity() {
             viewBinding.mainEight,
             viewBinding.mainNine
         ).forEachIndexed { index, textView ->
-            textView.setOnClickListener { viewModel.onNumberClick(index) }
+            textView.setOnClickListener {
+                viewModel.onNumberClick(index)
+                vibrate()
+            }
         }
 
-        viewBinding.mainMinus.setOnClickListener {
-            viewModel.onOperatorClick(Operator.MINUS)
+        mapOf(
+            Operator.PLUS to viewBinding.mainPlus,
+            Operator.MINUS to viewBinding.mainMinus,
+            Operator.MULTIPLY to viewBinding.mainMultiply,
+            Operator.DIVIDE to viewBinding.mainDivide,
+            Operator.POINT to viewBinding.mainPoint
+        ).forEach { (operator, textView) ->
+            textView.setOnClickListener {
+                viewModel.onOperatorClick(operator)
+                vibrate()
+            }
         }
-        viewBinding.mainPlus.setOnClickListener {
-            viewModel.onOperatorClick(Operator.PLUS)
-        }
-        viewBinding.mainMultiply.setOnClickListener {
-            viewModel.onOperatorClick(Operator.MULTIPLY)
-        }
-        viewBinding.mainDivide.setOnClickListener {
-            viewModel.onOperatorClick(Operator.DIVIDE)
-        }
-        viewBinding.mainPoint.setOnClickListener {
-            viewModel.onOperatorClick(Operator.POINT)
-        }
+
 
         viewBinding.mainErase.setOnClickListener {
             viewModel.onEraseClick()
+            vibrate()
         }
         viewBinding.mainClear.setOnClickListener {
             viewModel.onClearClick()
+            vibrate()
         }
         viewBinding.mainEquals.setOnClickListener {
             viewModel.onEqualsClick()
+            vibrate()
         }
 
         viewModel.expressionState.observe(this) { state ->
@@ -113,6 +122,16 @@ class MainActivity : BaseActivity() {
 
     private fun openHistory() {
         resultLauncher.launch()
+    }
+
+    private fun vibrate() {
+        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
+        if (vibrator.hasVibrator()) {
+            Log.d("main", "vibration")
+            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            Log.d("main", "no vibrator")
+        }
     }
 
 }

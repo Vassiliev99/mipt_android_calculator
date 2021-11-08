@@ -25,18 +25,17 @@ class SettingsActivity() : BaseActivity() {
     }
     private val viewBinding by viewBinding(SettingsActivityBinding::bind)
 
-    companion object {
-        const val SETTINGS_RESULT_KEY = "SETTINGS_RESULT_KEY"
-        const val SETTINGS_RESULT_REQUEST_CODE = 9
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
         viewBinding.settingsBack.setOnClickListener {
-            //setResult(Activity.RESULT_OK, Intent().putExtra(SETTINGS_RESULT_KEY, "result"))
             finish()
+        }
+
+        viewModel.vibrationNumberState.observe(this) { state ->
+            viewBinding.settingsVibration.setText((state * 10).toString())
+            viewBinding.settingsVibrationBar.setProgress(state)
         }
 
         viewModel.precisionNumberState.observe(this) { state ->
@@ -51,11 +50,31 @@ class SettingsActivity() : BaseActivity() {
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
             }
-
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
 
         })
+
+
+
+        viewBinding.settingsVibrationBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, p2: Boolean) {
+                viewModel.onVibrationNumberChanged(progress)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+
+        })
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.onStart()
     }
 
 }
