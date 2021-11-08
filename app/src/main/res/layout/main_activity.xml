@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.main.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <TextView
+                android:id="@+id/main_clear"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="C"
+                />
+
+            <ImageView
+                android:id="@+id/main_erase"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_backspace_24"
+                android:scaleType="center"
+                />
+            <TextView
+                android:id="@+id/main_memory"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="M"
+                />
+            <TextView
+                android:id="@+id/main_divide"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="/" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <TextView
+                android:id="@+id/main_seven"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="7"
+                />
+
+            <TextView
+                android:id="@+id/main_eight"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="8"
+                />
+            <TextView
+                android:id="@+id/main_nine"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="9"
+                />
+            <TextView
+                android:id="@+id/main_multiply"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="*" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/main_four"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <TextView
+                android:id="@+id/main_five"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <TextView
+                android:id="@+id/main_six"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="6" />
+            <TextView
+                android:id="@+id/main_plus"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="+" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/main_one"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="1" />
+
+            <TextView
+                android:id="@+id/main_two"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <TextView
+                android:id="@+id/main_three"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="3" />
+            <TextView
+                android:id="@+id/main_minus"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="-" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/main_point"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="." />
+
+            <TextView
+                android:id="@+id/main_zero"
+                style="@style/MainButton"
+                android:layout_weight="1"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/main_equals"
+                style="@style/MainButton"
+                android:layout_weight="2"
+                android:text="=" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/main_input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="textMultiLine"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/main_result"
+        app:layout_constraintTop_toBottomOf="@+id/main_settings" />
+
+    <TextView
+        android:id="@+id/main_result"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="end|center_vertical"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/main_button_container"
+        tools:text="12235325" />
+
+    <ImageView
+        android:id="@+id/main_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_history_32" />
+
+    <ImageView
+        android:id="@+id/main_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings_32" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
