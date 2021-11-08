@@ -6,11 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.mipt.android_calculator.domain.HistoryRepository
 import ru.mipt.android_calculator.domain.SettingsDao
 import ru.mipt.android_calculator.domain.calculateExpression
+import ru.mipt.android_calculator.domain.entity.HistoryItem
 
 class MainViewModel(
-    private val settingsDao: SettingsDao
+    private val settingsDao: SettingsDao,
+    private val historyRepository: HistoryRepository
 ) : ViewModel() {
 
     private var expression: String = ""
@@ -77,6 +80,9 @@ class MainViewModel(
 
     fun onEqualsClick() {
         if (expression.isNotEmpty() && expression.last().isDigit()) {
+            viewModelScope.launch {
+                historyRepository.add(HistoryItem(expression, _resultState.value.toString()))
+            }
             expression = _resultState.value.toString()
             _expressionState.value = expression
         }
@@ -88,6 +94,14 @@ class MainViewModel(
             if (expression.isNotEmpty() && expression.last().isDigit()) {
                 _resultState.value = _precisionNumber.value?.let { calculateExpression(expression, it) }
             }
+        }
+    }
+
+    fun onHistoryResult(item: HistoryItem?) {
+        if (item != null) {
+            expression = item.expression
+            _expressionState.value = expression
+            _resultState.value = item.result
         }
     }
 }
