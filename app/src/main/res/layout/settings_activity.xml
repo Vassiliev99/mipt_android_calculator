@@ -89,7 +89,6 @@
         android:text="50"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_precision_bar" />
@@ -103,7 +102,6 @@
         android:text="Вибрация"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/settings_vibration_bar"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -116,7 +114,6 @@
         android:text="%"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/settings_vibration_bar"
         app:layout_constraintStart_toEndOf="@+id/settings_vibration" />
 
@@ -129,7 +126,6 @@
         android:layout_marginEnd="24dp"
         android:max="10"
         android:progress="4"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
